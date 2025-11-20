@@ -11,6 +11,8 @@ body {
 }
 
 .navbar {
+    position: sticky;
+    top: 0;
     background: #2d2557;
     padding: 0.8rem 2rem;
     display: flex;
@@ -56,6 +58,16 @@ body {
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+}
+
+.IN-logo {
+    transition: opacity 0.35s ease, transform 1s ease;
+}
+
+.IN-logo.hide {
+    opacity: 0;
+    transform: translateY(50px);
+    pointer-events: none;
 }
 
 .IN img {
