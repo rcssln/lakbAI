@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lakbAI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="pin-icon">📌</span>
+            <span class="logo-text">lakbAI</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
+    </nav>
+
+    <header class="IN">
+        <div class="IN-logo">
+            <img src="Images/INHeading.jpg" alt="Banner">
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="interest-section">
+            <h2>Interest</h2>
+            <div class="interest-buttons">
+                <button class="interest-btn" data-interest="church">Church</button>
+                <button class="interest-btn" data-interest="hotel">Hotel</button>
+                <button class="interest-btn" data-interest="beach">Beach</button>
+                <button class="interest-btn" data-interest="mountain">Mountain</button>
+                <button class="interest-btn" data-interest="cafe">Café</button>
+                <button class="interest-btn" data-interest="park">Park</button>
+                <button class="interest-btn" data-interest="tourist">Tourist</button>
+            </div>
+        </section>
+
+        <section class="budget-section">
+            <h2>Budget</h2>
+            <div class="budget-slider">
+                <div class="budget-label">₱<span id="budget-value">500</span></div>
+                <input type="range" id="budget-range" min="0" max="10000" value="500" step="100">
+            </div>
+        </section>
+
+        <section class="calendar-section">
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button class="nav-btn prev">&lt;</button>
+                    <h3 id="current-month">November 2025</h3>
+                    <button class="nav-btn next">&gt;</button>
+                </div>
+                <div class="calendar-days-header">
+                    <div class="day-header">SUN</div>
+                    <div class="day-header">MON</div>
+                    <div class="day-header">TUE</div>
+                    <div class="day-header">WED</div>
+                    <div class="day-header">THU</div>
+                    <div class="day-header">FRI</div>
+                    <div class="day-header">SAT</div>
+                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
+            </div>
+        </section>
+
+        <button class="plan-trip-btn" onclick="window.location.href='trips.html'">Plan Trip</button>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
