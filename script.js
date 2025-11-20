@@ -1,5 +1,15 @@
 // interest buttons
 const interestButtons = document.querySelectorAll('.interest-btn');
+const navbar = document.querySelector(".navbar");
+const inLogo = document.querySelector(".IN-logo");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > navbar.offsetHeight + 10) {
+        inLogo.classList.add("hide");
+    } else {
+        inLogo.classList.remove("hide");
+    }
+});
 
 interestButtons.forEach(button => {
     button.addEventListener('click', () => {
