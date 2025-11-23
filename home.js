@@ -1,4 +1,3 @@
-// interest buttons
 const interestButtons = document.querySelectorAll('.interest-btn');
 const navbar = document.querySelector(".navbar");
 const inLogo = document.querySelector(".IN-logo");
@@ -122,17 +121,20 @@ document.querySelector('.next').addEventListener('click', () => {
 });
 
 document.querySelector('.plan-trip-btn').addEventListener('click', () => {
+    // get selected interests using data-interest attribute
     const selectedInterests = Array.from(document.querySelectorAll('.interest-btn.active'))
-        .map(btn => btn.textContent);
-    const budget = budgetValue.textContent;
-    const dateRange = startDate && endDate 
-        // ? = if, : = else baka matikaw kayo
-        ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-        : startDate 
-        ? startDate.toLocaleDateString()
-        : 'Not selected';
-    
-    alert(`Planning your trip!\n\nInterests: ${selectedInterests.join(', ')}\nBudget: ₱${budget}\nDates: ${dateRange}`);
+        .map(btn => btn.getAttribute('data-interest'));
+
+    const budget = Number(budgetValue.textContent);
+
+    console.log("Saving interests:", selectedInterests);
+    console.log("Saving budget:", budget);
+
+    // SAVE TO LOCAL STORAGE
+    localStorage.setItem("selectedInterests", JSON.stringify(selectedInterests));
+    localStorage.setItem("selectedBudget", budget);
+
+    window.location.href = "trips.html";
 });
 
 renderCalendar();
