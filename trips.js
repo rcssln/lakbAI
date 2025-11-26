@@ -1,34 +1,46 @@
 let selectedInterests = JSON.parse(localStorage.getItem("selectedInterests")) || [];
 let selectedBudget = Number(localStorage.getItem("selectedBudget")) || 0;
+let selectedDuration = JSON.parse(localStorage.getItem("selectedDuration")) || [];
+let selectedStyle = JSON.parse(localStorage.getItem("selectedStyle")) || [];
 
 const cardContainer = document.getElementById("trip-cards");
 
 console.log("User selected interests:", selectedInterests);
 console.log("User budget:", selectedBudget);
+console.log("User duration:", selectedDuration);
+console.log("User Style:", selectedStyle);
 
 const knowledgeBase = [
     // BEACH Done
     {
         id: "pagudpud_saud_beach",
         interest: "beach",
+        duration: null,
+        style: null,
         min: 0,
         max: 3000
     },
     {
         id: "blue_lagoon_pagudpud",
         interest: "beach",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "kapurpurawan_rock_formations",
         interest: "beach",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "currimao_beach",
         interest: "beach",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 3000
     },
@@ -37,24 +49,32 @@ const knowledgeBase = [
     {
         id: "kabigan_falls",
         interest: "falls",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "tanap_avis_falls",
         interest: "falls",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "encantadora_falls",
         interest: "falls",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 1000
     },
     {
         id: "kingkong_falls",
         interest: "falls",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
@@ -63,24 +83,32 @@ const knowledgeBase = [
     {
         id: "paoay_church",
         interest: "church",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "st_william_church",
         interest: "church",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "santa_monica_church",
         interest: "church",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 1000
     },
     {
         id: "san_nicolas_church",
         interest: "church",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
@@ -89,24 +117,32 @@ const knowledgeBase = [
     {
         id: "bangui_windmills_park",
         interest: "landmark",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "patapat_viaduct",
         interest: "landmark",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 5000
     },
     {
         id: "malacanang_of_the_north",
         interest: "landmark",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 3000
     },
     {
         id: "sand_dunes",
         interest: "landmark",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 4000
     },
@@ -115,12 +151,16 @@ const knowledgeBase = [
     {
         id: "mount_sicapoo",
         interest: "mountains",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 3000
     },
     {
         id: "mount_lammin",
         interest: "mountains",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000 
     },
@@ -129,24 +169,32 @@ const knowledgeBase = [
     {
         id: "cuisine_de_iloco",
         interest: "cafe",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "cafe_teria",
         interest: "cafe",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "cafe_ilocandia",
         interest: "cafe",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "art_cafe_pagudpud",
         interest: "cafe",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
@@ -155,48 +203,77 @@ const knowledgeBase = [
     {
         id: "java_hotel",
         interest: "hotel",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "plaza_del_norte",
         interest: "hotel",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "fort_ilocandia",
         interest: "hotel",
+        duration: "dayTrip",
+        style: "scenic",
         min: 0,
         max: 2000
     },
     {
         id: "balay_travel_lodge",
         interest: "hotel",
+        duration: "2days",
+        style: "romantic",
         min: 0,
         max: 2000
     },
 ];
 
-function runExpertSystem(interests, budget) {
+function runExpertSystem(interests, budget, duration, style) {
     let results = [];
 
     knowledgeBase.forEach(place => {
-        console.log(`Checking ${place.id}: interest=${place.interest}, budget range=${place.min}-${place.max}`);
+        console.log(`Checking ${place.id}: interest=${place.interest}, budget range=${place.min}-${place.max}, trip duration=${place.duration}, style=${place.style}`);
         
-        // RULE: interest must match (case-insensitive)
+        // RULE 1: interest must match (case-insensitive)
         const interestMatch = interests.some(userInterest => 
             userInterest.toLowerCase() === place.interest.toLowerCase()
         );
 
-        // haan u panpansinen detoyen haha for debugging lang ijay console
+        // Rule 2: duration must match
+        const durationMatch = place.duration === null || duration.some(userDuration =>
+            userDuration.toLowerCase() === place.duration.toLowerCase()
+        );
+
+        // RUle 3: style must match
+        const styleMatch = place.style === null || duration.some(userStyle =>
+            userStyle.toLowerCase() === place.style.toLowerCase()
+        );
+
         if (!interestMatch) {
-            console.log(`Interest doesn't match`);
+            // haan u panpansinen detoyen haha for debugging lang ijay console
+            console.log("Interest doesnt match");
             return;
         }
 
+        // Rule 4: Budget must fit
         if (budget < place.min || budget > place.max) {
-            console.log(`Budget doesn't fit (${budget} not in ${place.min}-${place.max})`);
+            console.log('Budget doesnt fit (${budget} not in ${place.min}-${place.max})');
+            return;
+        }
+
+        if (!durationMatch) {
+            console.log("duration does not match");
+            return;
+        }
+
+        if (!styleMatch) {
+            console.log("style does not match");
             return;
         }
 
@@ -381,7 +458,6 @@ const placeInfo = {
         img: "Images/Landmark/malacanang_of_the_north.jpg",
         about: "some shit"
     }
-
 };
 
 function displayCards(places) {
@@ -409,7 +485,7 @@ function displayCards(places) {
     });
 }
 
-let recommendedPlaces = runExpertSystem(selectedInterests, selectedBudget);
+let recommendedPlaces = runExpertSystem(selectedInterests, selectedBudget, selectedDuration, selectedStyle);
 
 console.log("AI Recommended Places:", recommendedPlaces);
 
