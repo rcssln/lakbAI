@@ -95,7 +95,9 @@ body {
 }
 
 .interest-section h2,
-.budget-section h2 {
+.budget-section h2,
+.duration-section h2,
+.style-section h2 {
     font-size: 1.5rem;
     margin-bottom: 1.6rem;
     color: #000000;
@@ -109,23 +111,46 @@ body {
     justify-content: center;
 }
 
+.trip-duration-buttons,
+.trip-style-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+}
+
 .interest-btn {
     padding: 0.8rem 2rem;
     border: none;
     border-radius: 50px;
     font-size: 1.1rem;
-    cursor: pointer;
     transition: all 0.3s;
     background: #ffffff;
     box-shadow: 0 5px 9px rgba(0,0,0,0.2);
 }
 
-.interest-btn.active {
+.duration-btn, .style-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    background: #ffffff;   
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.interest-btn.active,
+.duration-btn.active,
+.style-btn.active {
     background: #aaaaaa;
     color: #000000;
 }
 
-.interest-btn:hover {
+.interest-btn:hover,
+.duration-btn:hover,
+.style-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
@@ -179,92 +204,6 @@ body {
     border: none;
 }
 
-.calendar-section {
-    margin-bottom: 2rem;
-}
-
-.calendar {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.calendar-header h3 {
-    font-size: 1.3rem;
-    color: #000000;
-}
-
-.nav-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #000000;
-    padding: 0.5rem;
-}
-
-.calendar-days-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.3rem;
-}
-
-.day-header {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #000000;
-    padding: 0.3rem;
-    font-weight: medium;
-}
-
-.calendar-day {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.95rem;
-    padding: 0.2rem;
-}
-
-.calendar-day:hover:not(.other-month) {
-    background: #f0f0f0;
-}
-
-.calendar-day.other-month {
-    color: #ccc;
-}
-
-.calendar-day.range-start,
-.calendar-day.range-end {
-    background: #5e4ba1;
-    color: white;
-    font-weight: bold;
-}
-
-.calendar-day.in-range {
-    background: #b3a3d6;
-    color: white;
-    font-weight: 500;
-}
-
 .plan-trip-btn {
     display: block;
     width: 250px;
@@ -286,6 +225,27 @@ body {
     box-shadow: 0 6px 16px rgba(13, 94, 61, 0.4);
 }
 
+.quote-section {
+    background: #5e4ba1;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    margin: 2.5rem 0;
+}
+
+.quote-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.quote-section p {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
 @media (max-width: 700px) {
     .container {
         padding: 1rem;
@@ -298,13 +258,5 @@ body {
     .interest-btn {
         padding: 0.6rem 1.5rem;
         font-size: 1rem;
-    }
-
-    .calendar {
-        padding: 1rem;
-    }
-
-    .calendar-day {
-        font-size: 0.9rem;
     }
 }
