@@ -14,7 +14,7 @@ const knowledgeBase = [
     // BEACH Done
     {
         id: "pagudpud_saud_beach",
-        interest: "beach",
+        interest: "Beach",
         duration: null,
         style: null,
         min: 0,
@@ -22,25 +22,25 @@ const knowledgeBase = [
     },
     {
         id: "blue_lagoon_pagudpud",
-        interest: "beach",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Beach",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 5000
     },
     {
         id: "kapurpurawan_rock_formations",
-        interest: "beach",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Beach",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 5000
     },
     {
         id: "currimao_beach",
-        interest: "beach",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Beach",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 3000
     },
@@ -48,33 +48,33 @@ const knowledgeBase = [
     // FALLS Done
     {
         id: "kabigan_falls",
-        interest: "falls",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Falls",
+        duration: "Day Trip",
+        style: "Adventure",
         min: 0,
         max: 5000
     },
     {
         id: "tanap_avis_falls",
-        interest: "falls",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Falls",
+        duration: "Day Trip",
+        style: "Adventure",
         min: 0,
         max: 5000
     },
     {
         id: "encantadora_falls",
-        interest: "falls",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Falls",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 1000
     },
     {
         id: "kingkong_falls",
-        interest: "falls",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Falls",
+        duration: "Day Trip",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
@@ -82,33 +82,33 @@ const knowledgeBase = [
     // CHURCH Done
     {
         id: "paoay_church",
-        interest: "church",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Church",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 5000
     },
     {
         id: "st_william_church",
-        interest: "church",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Church",
+        duration: "2 Days & 1 Night",
+        style: "Romantic",
         min: 0,
         max: 5000
     },
     {
         id: "santa_monica_church",
-        interest: "church",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Church",
+        duration: "Day Trip",
+        style: null,
         min: 0,
         max: 1000
     },
     {
         id: "san_nicolas_church",
-        interest: "church",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Church",
+        duration: "Day Trip",
+        style: null,
         min: 0,
         max: 2000
     },
@@ -116,33 +116,33 @@ const knowledgeBase = [
     // LANDMARKS Done
     {
         id: "bangui_windmills_park",
-        interest: "landmark",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Landmark",
+        duration: "3 Days & 2 Nights",
+        style: "Scenic View",
         min: 0,
         max: 5000
     },
     {
         id: "patapat_viaduct",
-        interest: "landmark",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Landmark",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 5000
     },
     {
         id: "malacanang_of_the_north",
-        interest: "landmark",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Landmark",
+        duration: "Day Trip",
+        style: "Scenic View",
         min: 0,
         max: 3000
     },
     {
         id: "sand_dunes",
-        interest: "landmark",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Landmark",
+        duration: "Day Trip",
+        style: "Adventure",
         min: 0,
         max: 4000
     },
@@ -150,17 +150,17 @@ const knowledgeBase = [
     // Mountains Done
     {
         id: "mount_sicapoo",
-        interest: "mountains",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Mountains",
+        duration: "2 Days & 1 Night",
+        style: "Scenic View",
         min: 0,
         max: 3000
     },
     {
         id: "mount_lammin",
-        interest: "mountains",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Mountains",
+        duration: "2 Days & 1 Night",
+        style: "Scenic View",
         min: 0,
         max: 2000 
     },
@@ -168,33 +168,33 @@ const knowledgeBase = [
     // Cafe Done
     {
         id: "cuisine_de_iloco",
-        interest: "cafe",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Cafe",
+        duration: "Day Trip",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "cafe_teria",
-        interest: "cafe",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Cafe",
+        duration: "Day Trip",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "cafe_ilocandia",
-        interest: "cafe",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Cafe",
+        duration: "Day Trip",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "art_cafe_pagudpud",
-        interest: "cafe",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Cafe",
+        duration: "Day Trip",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
@@ -202,33 +202,33 @@ const knowledgeBase = [
     // Hotels Done
     {
         id: "java_hotel",
-        interest: "hotel",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Hotel",
+        duration: "2 Days & 1 Night",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "plaza_del_norte",
-        interest: "hotel",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Hotel",
+        duration: "2 Days & 1 Night",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "fort_ilocandia",
-        interest: "hotel",
-        duration: "dayTrip",
-        style: "scenic",
+        interest: "Hotel",
+        duration: "2 Days & 1 Night",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
     {
         id: "balay_travel_lodge",
-        interest: "hotel",
-        duration: "2days",
-        style: "romantic",
+        interest: "Hotel",
+        duration: "2 Days & 1 Night",
+        style: "Romantic",
         min: 0,
         max: 2000
     },
@@ -263,7 +263,7 @@ function runExpertSystem(interests, budget, duration, style) {
 
         // Rule 4: Budget must fit
         if (budget < place.min || budget > place.max) {
-            console.log('Budget doesnt fit (${budget} not in ${place.min}-${place.max})');
+            console.log(`Budget doesnt fit (${budget} not in ${place.min}-${place.max})`);
             return;
         }
 
@@ -487,8 +487,6 @@ function displayCards(places) {
 
 let recommendedPlaces = runExpertSystem(selectedInterests, selectedBudget, selectedDuration, selectedStyle);
 
-console.log("AI Recommended Places:", recommendedPlaces);
-
 // no match 
 if (recommendedPlaces.length === 0) {
     console.warn("No matches found");
@@ -502,4 +500,3 @@ if (recommendedPlaces.length === 0) {
 } else {
     displayCards(recommendedPlaces);
 }
-
