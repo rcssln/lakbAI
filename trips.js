@@ -251,7 +251,7 @@ function runExpertSystem(interests, budget, duration, style) {
         );
 
         // RUle 3: style must match
-        const styleMatch = place.style === null || duration.some(userStyle =>
+        const styleMatch = place.style === null || style.some(userStyle =>
             userStyle.toLowerCase() === place.style.toLowerCase()
         );
 
@@ -502,3 +502,4 @@ if (recommendedPlaces.length === 0) {
 } else {
     displayCards(recommendedPlaces);
 }
+
