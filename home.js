@@ -69,4 +69,3 @@ document.querySelector('.plan-trip-btn').addEventListener('click', () => {
     window.location.href = "trips.html";
 });
 
-renderCalendar();
