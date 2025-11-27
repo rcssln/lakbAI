@@ -1,502 +1,163 @@
-let selectedInterests = JSON.parse(localStorage.getItem("selectedInterests")) || [];
-let selectedBudget = Number(localStorage.getItem("selectedBudget")) || 0;
-let selectedDuration = JSON.parse(localStorage.getItem("selectedDuration")) || [];
-let selectedStyle = JSON.parse(localStorage.getItem("selectedStyle")) || [];
+const interestButtons = document.querySelectorAll('.interest-btn');
+const durationButtons = document.querySelectorAll('.duration-btn');
+const styleButtons = document.querySelectorAll('.style-btn');
+const navbar = document.querySelector(".navbar");
+const inLogo = document.querySelector(".IN-logo");
 
-const cardContainer = document.getElementById("trip-cards");
-
-console.log("User selected interests:", selectedInterests);
-console.log("User budget:", selectedBudget);
-console.log("User duration:", selectedDuration);
-console.log("User Style:", selectedStyle);
-
-const knowledgeBase = [
-    // BEACH Done
-    {
-        id: "pagudpud_saud_beach",
-        interest: "Beach",
-        duration: null,
-        style: null,
-        min: 0,
-        max: 3000
-    },
-    {
-        id: "blue_lagoon_pagudpud",
-        interest: "Beach",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "kapurpurawan_rock_formations",
-        interest: "Beach",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "currimao_beach",
-        interest: "Beach",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 3000
-    },
-
-    // FALLS Done
-    {
-        id: "kabigan_falls",
-        interest: "Falls",
-        duration: "Day Trip",
-        style: "Adventure",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "tanap_avis_falls",
-        interest: "Falls",
-        duration: "Day Trip",
-        style: "Adventure",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "encantadora_falls",
-        interest: "Falls",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 1000
-    },
-    {
-        id: "kingkong_falls",
-        interest: "Falls",
-        duration: "Day Trip",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-
-    // CHURCH Done
-    {
-        id: "paoay_church",
-        interest: "Church",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "st_william_church",
-        interest: "Church",
-        duration: "2 Days & 1 Night",
-        style: "Romantic",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "santa_monica_church",
-        interest: "Church",
-        duration: "Day Trip",
-        style: null,
-        min: 0,
-        max: 1000
-    },
-    {
-        id: "san_nicolas_church",
-        interest: "Church",
-        duration: "Day Trip",
-        style: null,
-        min: 0,
-        max: 2000
-    },
-
-    // LANDMARKS Done
-    {
-        id: "bangui_windmills_park",
-        interest: "Landmark",
-        duration: "3 Days & 2 Nights",
-        style: "Scenic View",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "patapat_viaduct",
-        interest: "Landmark",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 5000
-    },
-    {
-        id: "malacanang_of_the_north",
-        interest: "Landmark",
-        duration: "Day Trip",
-        style: "Scenic View",
-        min: 0,
-        max: 3000
-    },
-    {
-        id: "sand_dunes",
-        interest: "Landmark",
-        duration: "Day Trip",
-        style: "Adventure",
-        min: 0,
-        max: 4000
-    },
-
-    // Mountains Done
-    {
-        id: "mount_sicapoo",
-        interest: "Mountains",
-        duration: "2 Days & 1 Night",
-        style: "Scenic View",
-        min: 0,
-        max: 3000
-    },
-    {
-        id: "mount_lammin",
-        interest: "Mountains",
-        duration: "2 Days & 1 Night",
-        style: "Scenic View",
-        min: 0,
-        max: 2000 
-    },
-
-    // Cafe Done
-    {
-        id: "cuisine_de_iloco",
-        interest: "Cafe",
-        duration: "Day Trip",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "cafe_teria",
-        interest: "Cafe",
-        duration: "Day Trip",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "cafe_ilocandia",
-        interest: "Cafe",
-        duration: "Day Trip",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "art_cafe_pagudpud",
-        interest: "Cafe",
-        duration: "Day Trip",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-
-    // Hotels Done
-    {
-        id: "java_hotel",
-        interest: "Hotel",
-        duration: "2 Days & 1 Night",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "plaza_del_norte",
-        interest: "Hotel",
-        duration: "2 Days & 1 Night",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "fort_ilocandia",
-        interest: "Hotel",
-        duration: "2 Days & 1 Night",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-    {
-        id: "balay_travel_lodge",
-        interest: "Hotel",
-        duration: "2 Days & 1 Night",
-        style: "Romantic",
-        min: 0,
-        max: 2000
-    },
-];
-
-function runExpertSystem(interests, budget, duration, style) {
-    let results = [];
-
-    knowledgeBase.forEach(place => {
-        console.log(`Checking ${place.id}: interest=${place.interest}, budget range=${place.min}-${place.max}, trip duration=${place.duration}, style=${place.style}`);
-        
-        // RULE 1: interest must match (case-insensitive)
-        const interestMatch = interests.some(userInterest => 
-            userInterest.toLowerCase() === place.interest.toLowerCase()
-        );
-
-        // Rule 2: duration must match
-        const durationMatch = place.duration === null || duration.some(userDuration =>
-            userDuration.toLowerCase() === place.duration.toLowerCase()
-        );
-
-        // RUle 3: style must match
-        const styleMatch = place.style === null || style.some(userStyle =>
-            userStyle.toLowerCase() === place.style.toLowerCase()
-        );
-
-        if (!interestMatch) {
-            // haan u panpansinen detoyen haha for debugging lang ijay console
-            console.log("Interest doesnt match");
-            return;
-        }
-
-        // Rule 4: Budget must fit
-        if (budget < place.min || budget > place.max) {
-            console.log(`Budget doesnt fit (${budget} not in ${place.min}-${place.max})`);
-            return;
-        }
-
-        if (!durationMatch) {
-            console.log("duration does not match");
-            return;
-        }
-
-        if (!styleMatch) {
-            console.log("style does not match");
-            return;
-        }
-
-        console.log(`Match found!`);
-        results.push(place.id);
-    });
-
-    return results;
-}
-
-const placeInfo = {
-    // CHURCHES DONE
-    st_william_church: {
-        name: "St. William Cathedral",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Church/st_william.jpg",
-        about: "Historic baroque cathedral located in Laoag."
-    },
-    santa_monica_church: {
-        name: "Santa Monica Church",
-        city: "Sarrat, Ilocos Norte",
-        img: "Images/Church/santa_monica.jpg",
-        about: "One of the largest churches in Ilocos."
-    },
-    san_nicolas_church: {
-        name: "San Nicolas Church",
-        city: "San Nicolas, Ilocos Norte",
-        img: "Images/Church/san_nicolas_church.jpg",
-        about: "A Spanish-era parish church."
-    },
-    paoay_church: {
-        name: "Paoay Church",
-        city: "Paoay, Ilocos Norte",
-        img: "Images/Church/Paoay_Church.jpg",
-        about: "A UNESCO World Heritage Site known for massive buttresses."
-    },
-
-    // HOTELS Done
-    java_hotel: {
-        name: "Java Hotel",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Hotel/java_hotel.jpg",
-        about: "A boutique hotel with Balinese-inspired design."
-    },
-    plaza_del_norte: {
-        name: "Plaza Del Norte Hotel",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Hotel/plaza_del_norte.jpg",
-        about: "Elegant hotel near tourist attractions."
-    },
-    fort_ilocandia: {
-        name: "Fort Ilocandia Resort",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Hotel/fort_ilocandia.jpg",
-        about: "A premium beachfront resort."
-    },
-    balay_travel_lodge: {
-        name: "Balay Travel Lodge",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Hotel/balay_travel_lodge.jpg",
-        about: "Affordable and cozy lodge."
-    },
-
-    // BEACHES Done
-    pagudpud_saud_beach: {
-        name: "Saud Beach",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Beach/pagudpud_saud.jpg",
-        about: "Clear waters and fine white sand."
-    },
-    blue_lagoon_pagudpud: {
-        name: "Blue Lagoon",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Beach/blue_lagoon.jpg",
-        about: "A beautiful deep-blue lagoon."
-    },
-    kapurpurawan_rock_formations: {
-        name: "Kapurpurawan Rock Formations",
-        city: "Burgos, Ilocos Norte",
-        img: "Images/Beach/Kapurpurawan.jpg",
-        about: "White limestone formations sculpted by nature."
-    },
-    currimao_beach: {
-        name: "Currimao Beach",
-        city: "Currimao, Ilocos Norte",
-        img: "Images/Beach/currimao_beach.jpg",
-        about: "A calm and peaceful beach."
-    },
-
-    // FALLS Done
-    encantadora_falls: {
-        name: "Encantadora Falls",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Falls/encantadora.jpg",
-        about: "A hidden waterfall surrounded by forest."
-    },
-    kabigan_falls: {
-        name: "Kabigan Falls",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Falls/kabigan_falls.jpg",
-        about: "Beautiful falls requiring a scenic hike."
-    },
-    tanap_avis_falls: {
-        name: "Tanap-Avis Falls",
-        city: "Vintar, Ilocos Norte",
-        img: "Images/Falls/avis_falls.jpg",
-        about: "Cold natural pool and falls."
-    },
-    kingkong_falls: {
-        name: "Kingkong Falls",
-        city: "Adams, Ilocos Norte",
-        img: "Images/Falls/kingkong.jpg",
-        about: "Rock formations shaped like King Kong."
-    },
-
-    // CAFÉS Done
-    cuisine_de_iloco: {
-        name: "Cuisine de Iloco",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Cafe/cuisine_de_iloco.jpg",
-        about: "Authentic Ilocano food."
-    },
-    cafe_teria: {
-        name: "Cafe-Teria",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Cafe/cafe_teria.jpg",
-        about: "Pastries and coffee spot."
-    },
-    cafe_ilocandia: {
-        name: "Cafe Ilocandia",
-        city: "Laoag City, Ilocos Norte",
-        img: "Images/Cafe/cafe_ilocandia.jpg",
-        about: "Relaxing café inside Fort Ilocandia."
-    },
-    art_cafe_pagudpud: {
-        name: "Art Café",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Cafe/art_cafe.jpg",
-        about: "Beachside café with artistic vibes."
-    },
-
-    // Mountains Done 2/2
-    mount_sicapoo: {
-        name: "Mt. Sicapoo",
-        city: "Solsona, Ilocos Norte",
-        img: "Images/Mountains/sicapoo.jpg",
-        about: "awan ammok"
-    },
-
-    mount_lammin: {
-        name: "Mt. Lammin",
-        city: "Piddig, Ilocos Norte",
-        img: "Images/Mountains/lammin.jpg",
-        about: "..."
-    },
-
-    // Landmark Done
-    patapat_viaduct: {
-        name: "Patapat Viaduct",
-        city: "Pagudpud, Ilocos Norte",
-        img: "Images/Landmark/Patapat_Bridge.jpg",
-        about: "2lay"
-    },
-
-    sand_dunes: {
-        name: "La Paz Sand Dunes",
-        city: "Paoay, Ilocos Norte",
-        img: "Images/Landmark/sand_dunes.jpg",
-        about: "Known for 4x4 rides and sandboarding."
-    },
-
-    bangui_windmills_park: {
-        name: "Bangui Windmills",
-        city: "Bangui, Ilocos Norte",
-        img: "Images/Landmark/Windmill.jpg",
-        about: "windmll haha"
-    },
-
-    malacanang_of_the_north: {
-        name: "Malacanang of the North",
-        city: "Paoay, Ilocos Norte",
-        img: "Images/Landmark/malacanang_of_the_north.jpg",
-        about: "some shit"
+window.addEventListener("scroll", () => {
+    if (window.scrollY > navbar.offsetHeight + 10) {
+        inLogo.classList.add("hide");
+    } else {
+        inLogo.classList.remove("hide");
     }
-};
+});
 
-function displayCards(places) {
-    cardContainer.innerHTML = "";
+interestButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        button.classList.toggle('active');
+    });
+});
 
-    places.forEach(place => {
-        const info = placeInfo[place];
+durationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        button.classList.toggle('active');
+    });
+});
 
-        if (!info) {
-            console.warn("Missing entry in placeInfo:", place);
-            return;
-        }
+styleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        button.classList.toggle('active');
+    });
+});
 
-        cardContainer.innerHTML += `
-            <div class="trip-card">
-                <img src="${info.img}" class="trip-img" alt="${info.name}">
-                <div class="trip-overlay">
-                    <h3>${info.name}</h3>
+// budget slider
+const budgetRange = document.getElementById('budget-range');
+const budgetValue = document.getElementById('budget-value');
+
+budgetRange.addEventListener('input', (e) => {
+    const value = e.target.value;
+    budgetValue.textContent = value;
+    
+    const percentage = (value / budgetRange.max) * 100;
+    budgetRange.style.background = `linear-gradient(to right, #5e4ba1 0%, #5e4ba1 ${percentage}%, #e0e0e0 ${percentage}%, #e0e0e0 100%)`;
+});
+
+// custom confirm function
+function showCustomConfirm(interests, duration, style, budget) {
+    return new Promise((resolve) => {
+
+        // modal overlay
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal-overlay';
+        
+        modalOverlay.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirm Your Trip</h3>
+                    <p>Please review your selections before proceeding</p>
                 </div>
-                <p class="trip-location">${info.city}</p>
-                <p class="trip-time">Time: 8 Minutes</p>
-                <p class="trip-about">About: ${info.about}</p>
+                
+                <div class="modal-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Interest:</span>
+                        <span class="detail-value ${interests.length === 0 ? 'empty' : ''}">
+                            ${interests.length > 0 ? interests.join(', ') : 'None selected'}
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Duration:</span>
+                        <span class="detail-value ${duration.length === 0 ? 'empty' : ''}">
+                            ${duration.length > 0 ? duration.join(', ') : 'None selected'}
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Style:</span>
+                        <span class="detail-value ${style.length === 0 ? 'empty' : ''}">
+                            ${style.length > 0 ? style.join(', ') : 'None selected'}
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Budget:</span>
+                        <span class="detail-value">₱${budget.toLocaleString()}</span>
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel">Cancel</button>
+                    <button class="modal-btn confirm">Confirm & Continue</button>
+                </div>
             </div>
         `;
+        
+        document.body.appendChild(modalOverlay);
+        
+        // animation
+        setTimeout(() => {
+            modalOverlay.classList.add('active');
+        }, 10);
+        
+        // confirm btn
+        modalOverlay.querySelector('.confirm').addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            setTimeout(() => {
+                document.body.removeChild(modalOverlay);
+                resolve(true);
+            }, 300);
+        });
+        
+        // cancel btn
+        modalOverlay.querySelector('.cancel').addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            setTimeout(() => {
+                document.body.removeChild(modalOverlay);
+                resolve(false);
+            }, 300);
+        });
+        
+        // cicking oytside the confirm. tapno maikkat
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+                setTimeout(() => {
+                    document.body.removeChild(modalOverlay);
+                    resolve(false);
+                }, 300);
+            }
+        });
     });
 }
 
-let recommendedPlaces = runExpertSystem(selectedInterests, selectedBudget, selectedDuration, selectedStyle);
+document.querySelector('.plan-trip-btn').addEventListener('click', async () => {
 
-// no match 
-if (recommendedPlaces.length === 0) {
-    console.warn("No matches found");
-    cardContainer.innerHTML = `
-        <div class="no-results">
-            <div class="no-results-emoji"></div>
-            <h3>No trips match your Interest or Budget</h3>
-            <p>Try adjusting your interests or budget and plan again!</p>
-        </div>
-    `;
-} else {
-    displayCards(recommendedPlaces);
-}
+    // get selected interests using data-interest attribute
+    const selectedInterests = Array.from(document.querySelectorAll('.interest-btn.active'))
+        .map(btn => btn.getAttribute('data-interest'));
+
+    const selectedDuration = Array.from(document.querySelectorAll('.duration-btn.active'))
+        .map(btn => btn.getAttribute('data-interest'));
+    
+    const selectedStyle = Array.from(document.querySelectorAll('.style-btn.active'))
+        .map(btn => btn.getAttribute('data-interest'));
+
+    const budget = Number(budgetValue.textContent);
+
+    // show confirmation
+    const confirmed = await showCustomConfirm(selectedInterests, selectedDuration, selectedStyle, budget);
+    
+    if (!confirmed) {
+        return; // cancel == home.html
+    }
+
+    console.log("Saving interests:", selectedInterests);
+    console.log("Saving budget:", budget);
+    console.log("Saving duration:", selectedDuration);
+    console.log("Saving style:", selectedStyle);
+
+    // SAVE TO LOCAL STORAGE
+    localStorage.setItem("selectedInterests", JSON.stringify(selectedInterests));
+    localStorage.setItem("selectedBudget", budget);
+    localStorage.setItem("selectedDuration", JSON.stringify(selectedDuration));
+    localStorage.setItem("selectedStyle", JSON.stringify(selectedStyle));
+
+    window.location.href = "trips.html";
+});
